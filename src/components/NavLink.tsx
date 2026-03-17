@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { ReactNode } from "react";
 
@@ -14,8 +12,8 @@ export default function NavLink({ href, children }: NavLinkProps) {
     <Link
       href={href}
       // ลบ w, h, relative, absolute ทิ้ง ปล่อยให้ขนาดมันยืดหดตามตัวอักษรข้างใน
-      className="font-semibold leading-[1.688rem] text-saddlebrown 
-      hover:text-black hover:underline transition-all cursor-pointer"
+      className="font-semibold leading-[1.688rem] text-saddlebrown transition-all 
+      cursor-pointer hover:text-[#e8a118]"
     >
       {children}
     </Link>
