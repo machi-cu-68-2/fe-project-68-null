@@ -9,7 +9,7 @@ export default function LogoContainer() {
         height={50}
         sizes="100vw"
         alt="logo"
-        src="/icon/logo.svg"
+        src="/icons/logo.svg"
       />
     </div>
   );

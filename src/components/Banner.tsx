@@ -13,7 +13,7 @@ export default function Banner() {
         fill // ใช้ fill แทน width/height
         priority // ใส่ priority เพื่อบอกให้ Next.js รีบโหลดรูปนี้เพราะเป็นรูปแรกสุด
         alt="Fine Dining Banner"
-        src="/image/banner.jpg"
+        src="/images/banner.jpg"
       />
 
       {/* 2. ฟิลเตอร์ไล่สี (Gradient Overlay) */}
