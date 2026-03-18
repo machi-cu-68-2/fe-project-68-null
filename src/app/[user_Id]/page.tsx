@@ -16,30 +16,27 @@ const reservationData = [
 
 export default function ReservationPage() {
     return (
-        <div className="w-full min-h-screen bg-[#FEFAEC] flex flex-col items-center">
-            <div className="sticky top-0 w-full z-50">
-                <NavBar />
-            </div>
-            <div className="w-full max-w-[1440px] flex flex-col px-[6.937rem] pt-[4rem] pb-20 box-border font-playfair-display">
-
-                {/* 2. ส่งจำนวนข้อมูล (length) เข้าไปที่ ReservationHeader */}
-                <ReservationHeader count={reservationData.length} />
-
-                <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-8 gap-y-12 mt-8 w-full place-items-center">
-
-                    {/* 3. ใช้ .map() วนลูปสร้าง CardReservations ตามจำนวนข้อมูลที่มีใน Array */}
-                    {reservationData.map((item) => (
-                        <CardReservations
-                            key={item.id} // อย่าลืมใส่ key เวลาใช้ map ใน React
-                            name={item.name}
-                            day={item.day}
-                            time={item.time}
-                            countpeople={item.countpeople}
-                        />
-                    ))}
-
-                </div>
-            </div>
+      <div className="w-full min-h-screen bg-[#FEFAEC] flex flex-col items-center">
+        <div className="sticky top-0 w-full z-50">
+          <NavBar />
         </div>
+        <div className="w-full max-w-[1440px] flex flex-col px-[6.937rem] pt-[4rem] pb-20 box-border font-playfair-display">
+          {/* 2. ส่งจำนวนข้อมูล (length) เข้าไปที่ ReservationHeader */}
+          <ReservationHeader count={reservationData.length} />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-12 mt-8 w-full justify-items-center">
+            {/* 3. ใช้ .map() วนลูปสร้าง CardReservations ตามจำนวนข้อมูลที่มีใน Array */}
+            {reservationData.map((item) => (
+              <CardReservations
+                key={item.id} // อย่าลืมใส่ key เวลาใช้ map ใน React
+                name={item.name}
+                day={item.day}
+                time={item.time}
+                countpeople={item.countpeople}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
     );
 }
