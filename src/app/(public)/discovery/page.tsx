@@ -7,7 +7,7 @@ import { TopRestaurants } from "@/interface";
 
 // ============================================================
 // TODO: แทนที่ mock data นี้ด้วยการดึงข้อมูลจริงจาก database
-// todo : code review refactor
+// TODO : code review refactor WINNER
 // ============================================================
 const mockRestaurants: (TopRestaurants & { filter: string })[] = [
   {
