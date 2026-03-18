@@ -7,6 +7,7 @@ import { TopRestaurants } from "@/interface";
 
 // ============================================================
 // TODO: แทนที่ mock data นี้ด้วยการดึงข้อมูลจริงจาก database
+// todo : code review refactor
 // ============================================================
 const mockRestaurants: (TopRestaurants & { filter: string })[] = [
   {
@@ -15,7 +16,8 @@ const mockRestaurants: (TopRestaurants & { filter: string })[] = [
     location: "Downtown, Manhattan",
     rating: "4.9",
     reviews: "324",
-    imageSrc: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
+    imageSrc:
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
     filter: "French",
   },
   {
@@ -24,7 +26,8 @@ const mockRestaurants: (TopRestaurants & { filter: string })[] = [
     location: "Midtown East",
     rating: "4.8",
     reviews: "256",
-    imageSrc: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=800&q=80",
+    imageSrc:
+      "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=800&q=80",
     filter: "Japanese",
   },
   {
@@ -33,7 +36,8 @@ const mockRestaurants: (TopRestaurants & { filter: string })[] = [
     location: "Chelsea, West Side",
     rating: "4.7",
     reviews: "198",
-    imageSrc: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80",
+    imageSrc:
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80",
     filter: "Seafood",
   },
   {
@@ -42,7 +46,8 @@ const mockRestaurants: (TopRestaurants & { filter: string })[] = [
     location: "TriBeCa",
     rating: "4.6",
     reviews: "412",
-    imageSrc: "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80",
+    imageSrc:
+      "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80",
     filter: "Contemporary",
   },
   {
@@ -51,7 +56,8 @@ const mockRestaurants: (TopRestaurants & { filter: string })[] = [
     location: "Upper West Side",
     rating: "4.5",
     reviews: "289",
-    imageSrc: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80",
+    imageSrc:
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80",
     filter: "Italian",
   },
   {
@@ -60,7 +66,8 @@ const mockRestaurants: (TopRestaurants & { filter: string })[] = [
     location: "West Village",
     rating: "4.4",
     reviews: "174",
-    imageSrc: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80",
+    imageSrc:
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80",
     filter: "Contemporary",
   },
   {
@@ -69,7 +76,8 @@ const mockRestaurants: (TopRestaurants & { filter: string })[] = [
     location: "Flatiron District",
     rating: "4.8",
     reviews: "203",
-    imageSrc: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80",
+    imageSrc:
+      "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80",
     filter: "Contemporary",
   },
   {
@@ -78,7 +86,8 @@ const mockRestaurants: (TopRestaurants & { filter: string })[] = [
     location: "SoHo",
     rating: "4.6",
     reviews: "156",
-    imageSrc: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80",
+    imageSrc:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80",
     filter: "French",
   },
   {
@@ -87,7 +96,8 @@ const mockRestaurants: (TopRestaurants & { filter: string })[] = [
     location: "Battery Park",
     rating: "4.7",
     reviews: "231",
-    imageSrc: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",
+    imageSrc:
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",
     filter: "Seafood",
   },
   {
@@ -96,7 +106,8 @@ const mockRestaurants: (TopRestaurants & { filter: string })[] = [
     location: "Little Italy",
     rating: "4.5",
     reviews: "189",
-    imageSrc: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
+    imageSrc:
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
     filter: "Italian",
   },
   {
@@ -105,7 +116,8 @@ const mockRestaurants: (TopRestaurants & { filter: string })[] = [
     location: "Upper East Side",
     rating: "4.6",
     reviews: "142",
-    imageSrc: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80",
+    imageSrc:
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80",
     filter: "French",
   },
   {
@@ -114,12 +126,21 @@ const mockRestaurants: (TopRestaurants & { filter: string })[] = [
     location: "East Village",
     rating: "4.9",
     reviews: "311",
-    imageSrc: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=800&q=80",
+    imageSrc:
+      "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=800&q=80",
     filter: "Japanese",
   },
 ];
 
-const FILTERS = ["All", "French", "Japanese", "Italian", "Mediterranean", "Contemporary", "Seafood"];
+const FILTERS = [
+  "All",
+  "French",
+  "Japanese",
+  "Italian",
+  "Mediterranean",
+  "Contemporary",
+  "Seafood",
+];
 
 // ============================================================
 // Restaurant Card Component
@@ -132,7 +153,10 @@ function RestaurantCard({ restaurant }: { restaurant: TopRestaurants }) {
 
   return (
     <Link href={`/discovery/${slug}`} className="group block h-full">
-      <div className="bg-white rounded-2xl overflow-hidden border-2 border-[#f8e9a1] shadow-md transition-all duration-200 group-hover:-translate-y-1 group-hover:shadow-xl h-full flex flex-col">
+      <div
+        className="bg-white rounded-2xl overflow-hidden border-2 border-[#f8e9a1] 
+      shadow-md transition-all duration-200 group-hover:-translate-y-1 group-hover:shadow-xl h-full flex flex-col"
+      >
         {/* รูปร้าน */}
         <div className="relative h-44 overflow-hidden shrink-0">
           <img
@@ -148,18 +172,31 @@ function RestaurantCard({ restaurant }: { restaurant: TopRestaurants }) {
           <h3 className="font-playfair-display font-bold text-lg text-[#724a15] leading-tight mb-1">
             {restaurant.name}
           </h3>
-          <p className="text-[#ce7b11] text-sm font-medium mb-3">{restaurant.category}</p>
+          <p className="text-[#ce7b11] text-sm font-medium mb-3">
+            {restaurant.category}
+          </p>
           <div className="flex items-center gap-2 text-sm text-[rgba(139,69,21,0.65)] mt-auto flex-wrap">
             <span className="bg-[#f2d257] text-[#8b4515] font-semibold text-xs px-2 py-0.5 rounded-full">
               ★ {restaurant.rating}
             </span>
-            <span className="text-xs text-[rgba(139,69,21,0.5)]">({restaurant.reviews})</span>
+            <span className="text-xs text-[rgba(139,69,21,0.5)]">
+              ({restaurant.reviews})
+            </span>
             <div className="flex items-center gap-1 ml-auto">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
-              <span className="text-xs truncate max-w-[120px]">{restaurant.location}</span>
+              <span className="text-xs truncate max-w-[120px]">
+                {restaurant.location}
+              </span>
             </div>
           </div>
         </div>
@@ -186,18 +223,16 @@ export default function DiscoveryPage() {
 
   // กรองร้านตาม search + filter และจำกัดสูงสุด 10 รายการ
   const filteredRestaurants = useMemo(() => {
-    return mockRestaurants
-      .filter((r) => {
-        const matchesFilter = activeFilter === "All" || r.filter === activeFilter;
-        const query = searchQuery.toLowerCase();
-        const matchesSearch =
-          query === "" ||
-          r.name.toLowerCase().includes(query) ||
-          r.category.toLowerCase().includes(query) ||
-          r.location.toLowerCase().includes(query);
-        return matchesFilter && matchesSearch;
-      })
-      ;
+    return mockRestaurants.filter((r) => {
+      const matchesFilter = activeFilter === "All" || r.filter === activeFilter;
+      const query = searchQuery.toLowerCase();
+      const matchesSearch =
+        query === "" ||
+        r.name.toLowerCase().includes(query) ||
+        r.category.toLowerCase().includes(query) ||
+        r.location.toLowerCase().includes(query);
+      return matchesFilter && matchesSearch;
+    });
   }, [searchQuery, activeFilter]);
 
   return (
@@ -214,11 +249,19 @@ export default function DiscoveryPage() {
             Discover Fine Dining
           </h1>
           <p className="text-white/85 text-lg mb-7">
-            Explore curated restaurants handpicked for exceptional cuisine and unforgettable experiences
+            Explore curated restaurants handpicked for exceptional cuisine and
+            unforgettable experiences
           </p>
 
           <div className="flex items-center gap-3 bg-white rounded-full px-5 py-2.5 shadow-lg w-full max-w-xl">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(139,69,21,0.5)" strokeWidth="2">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="rgba(139,69,21,0.5)"
+              strokeWidth="2"
+            >
               <circle cx="11" cy="11" r="8" />
               <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
@@ -265,7 +308,9 @@ export default function DiscoveryPage() {
         {/* Section heading */}
         <div className="flex items-baseline justify-between mb-6">
           <h2 className="font-playfair-display font-bold text-3xl text-[#8b4515]">
-            {activeFilter === "All" ? "All Restaurants" : `${activeFilter} Restaurants`}
+            {activeFilter === "All"
+              ? "All Restaurants"
+              : `${activeFilter} Restaurants`}
           </h2>
           <span className="text-sm text-[rgba(139,69,21,0.55)]">
             Showing {filteredRestaurants.length} results
@@ -275,12 +320,17 @@ export default function DiscoveryPage() {
         {/* ไม่พบผลลัพธ์ */}
         {filteredRestaurants.length === 0 && (
           <div className="text-center py-20">
-            <p className="font-playfair-display text-2xl text-[#8b4515] mb-2">No restaurants found</p>
+            <p className="font-playfair-display text-2xl text-[#8b4515] mb-2">
+              No restaurants found
+            </p>
             <p className="text-[rgba(139,69,21,0.6)] text-sm mb-4">
               Try adjusting your search or filter
             </p>
             <button
-              onClick={() => { setSearchQuery(""); setActiveFilter("All"); }}
+              onClick={() => {
+                setSearchQuery("");
+                setActiveFilter("All");
+              }}
               className="bg-[#ce7b11] text-white px-6 py-2 rounded-full text-sm font-playfair-display font-semibold hover:bg-[#e8a118] transition-colors"
             >
               Clear filters
