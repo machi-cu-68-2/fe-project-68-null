@@ -2,7 +2,7 @@ import Image from "next/image";
 import HeadCard from "@/components/HeadCard";
 import CardTime from "@/components/CardTime";
 import CardDay from "@/components/CardDay";
-import CardCountPeople from "./CardCountPeople";
+import CardCountPeople from "./CardPeople";
 import CardButton from "@/components/CardButton";
 export default function CardRerservations({
   name,
