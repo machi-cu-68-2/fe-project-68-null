@@ -27,4 +27,6 @@ body {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-playfair-display: var(--font-playfair-display);
+  --color-saddlebrown: #8b4513;
+  --color-cornsilk: #fff8dc;
 }

@@ -1,17 +1,27 @@
-import Image from "next/image";
-import LogoContainer from "@/components/LogoContainer";
-import LogoText from "@/components/LogoText";
-import NavBar from "@/components/NavBar";
+import Banner from "@/components/Banner";
+import TopRestaurantMagazine from "@/components/TopRestaurantMagazine";
 
 export default function Home() {
   return (
-    <div
-      className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center 
-    min-h-screen p-8 pb-20 gap-16 sm:p-20"
-    >
-      <NavBar />
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start"></main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center"></footer>
+    <div className="font-sans min-h-screen w-full flex flex-col">
+      {/* ส่วนหัว: แบนเนอร์ */}
+      <Banner />
+
+      {/* ส่วนเนื้อหาหลัก*/}
+      <main className="flex-1 flex flex-col w-full">
+        {/* TODO: ใส่เนื้อหาเช่น Recommended Restaurants หรือ Categories ตรงนี้ */}
+        <TopRestaurantMagazine />
+      </main>
+
+      {/* ส่วนท้าย*/}
+      <footer
+        className="flex gap-6 flex-wrap items-center justify-center py-8 
+      bg-gray-50 w-full border-t border-gray-200"
+      >
+        <p className="text-gray-500 text-sm">
+          © 2024 NULL Dining. No rights reserved.
+        </p>
+      </footer>
     </div>
   );
 }

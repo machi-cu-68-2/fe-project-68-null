@@ -1,17 +1,19 @@
-export default function ReservationHeader({ count }: { count: number}) {
-    return (
-        <div className="flex flex-col items-start gap-[0.5rem]">
-            <h1 className="text-[3rem] font-bold text-[#8b4515] m-0 leading-none font-playfair-display  bg-[#e8a118] flex items-center justify-center font-semibold text-white transition-colors rounded-full w-[25rem] h-[5rem]">
-                My Reservations
-            </h1>
-            <p className="text-[2rem]  text-[#E1AB64] m-0 font-playfair-display ">
-                Manage your dining reservations
-            </p>
-            <div className="mt-[3rem] self-stretch flex flex-col items-start text-[#8b4515] text-[2rem]">
-                <div className="self-stretch h-[2.25rem] relative">
-                    <b className="absolute top-[0rem] left-[0rem] leading-[2.25rem]">Upcoming ({count})</b>
-                </div>
-            </div>
+export default function ReservationHeader({ count }: { count: number }) {
+  return (
+    <div className="flex flex-col items-start">
+      <h1 className="text-[3rem] font-bold text-[#8b4515] m-0 leading-none font-playfair-display mt-[6rem]">
+        My Reservations
+      </h1>
+      <p className="text-[2rem]  text-[#E1AB64] m-0 font-playfair-display ">
+        Manage your dining reservations
+      </p>
+      <div className="mt-[3rem] self-stretch flex flex-col items-start text-[#8b4515] text-[2rem]">
+        <div className="self-stretch h-[2.25rem] relative">
+          <b className="absolute top-[0rem] left-[0rem] leading-[2.25rem]">
+            Upcoming ({count})
+          </b>
         </div>
-    );
-};
+      </div>
+    </div>
+  );
+}

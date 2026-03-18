@@ -9,7 +9,8 @@ const reservationData = [
     { id: 3, name: "Restaurant LOS", day: "Wednesday, March 12", time: "18:00", countpeople: "4" },
     { id: 4, name: "Restaurant USA", day: "Wednesday, March 12", time: "18:00", countpeople: "4" },
     { id: 5, name: "Restaurant USA", day: "Wednesday, March 12", time: "18:00", countpeople: "4" },
-   
+    
+
     // ถ้าลบข้อมูลออก 1 บรรทัด หรือเพิ่มเข้าไป ตัวเลขและ Card จะเปลี่ยนตามอัตโนมัติ
 ];
 
