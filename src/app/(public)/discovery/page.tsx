@@ -204,7 +204,10 @@ function RestaurantCard({ restaurant }: { restaurant: TopRestaurants }) {
         {/* Footer */}
         <div className="px-4 pb-4 pt-2 border-t border-[#f8e9a1]">
           <div className="flex justify-end">
-            <span className="bg-[#ce7b11] text-white text-sm font-playfair-display font-semibold px-5 py-1.5 rounded-full group-hover:bg-[#e8a118] transition-colors">
+            <span
+              className="bg-[#ce7b11] text-white text-sm font-playfair-display 
+            font-semibold px-5 py-1.5 rounded-full group-hover:bg-[#e8a118] transition-colors"
+            >
               Reserve
             </span>
           </div>
