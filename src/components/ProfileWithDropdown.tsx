@@ -4,13 +4,19 @@ import { useState } from "react";
 import { signOut } from "next-auth/react";
 import Users from "../interface/๊Users";
 import Link from "next/link";
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 export default function ProfileWithDropdown({ user }: { user: Users }) {
   const [isDropDownClicked, setDropDownClicked] = useState<boolean>(false);
 
+  const handleClickAway = () => {
+    setDropDownClicked(false);
+  };
+
   return (
-    <div className="relative w-max font-playfair-display">
-      {/* Profile Trigger */}
+    <ClickAwayListener onClickAway={handleClickAway}>
+      <div className="relative w-max font-playfair-display">
+        {/* Profile Trigger */}
       <button
         className="flex items-center min-w-max h-13 px-4 gap-3 bg-transparent rounded-full 
       cursor-pointer hover:bg-black/5 transition-colors"
@@ -131,6 +137,7 @@ export default function ProfileWithDropdown({ user }: { user: Users }) {
           </button>
         </div>
       ) : null}
-    </div>
+      </div>
+    </ClickAwayListener>
   );
 }
