@@ -1,4 +1,4 @@
-export interface TopRestaurants {
+interface TopRestaurants {
   name: string;
   category: string;
   location: string;
@@ -6,3 +6,5 @@ export interface TopRestaurants {
   reviews: string;
   imageSrc: string;
 }
+
+export default TopRestaurants;

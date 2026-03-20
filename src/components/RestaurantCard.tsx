@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ImageWithSkeleton from "@/components/ImageWithSkeleton";
-import { TopRestaurants } from "@/interface";
+import { TopRestaurants } from "@/interface/TopRestaurant";
 
 interface RestaurantCardProps {
   restaurant: TopRestaurants;
@@ -30,14 +30,18 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
           <h3 className="font-playfair-display font-bold text-lg text-[#724a15] leading-tight mb-1">
             {restaurant.name}
           </h3>
-          <p className="text-[#ce7b11] text-sm font-medium mb-3">{restaurant.category}</p>
+          <p className="text-[#ce7b11] text-sm font-medium mb-3">
+            {restaurant.category}
+          </p>
 
           <div className="flex items-center gap-2 text-sm text-[rgba(139,69,21,0.65)] mt-auto flex-wrap">
             {/* Rating */}
             <span className="bg-[#f2d257] text-[#8b4515] font-semibold text-xs px-2 py-0.5 rounded-full">
               ★ {restaurant.rating}
             </span>
-            <span className="text-xs text-[rgba(139,69,21,0.5)]">({restaurant.reviews})</span>
+            <span className="text-xs text-[rgba(139,69,21,0.5)]">
+              ({restaurant.reviews})
+            </span>
 
             {/* Location */}
             <div className="flex items-center gap-1 ml-auto">
@@ -52,7 +56,9 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
-              <span className="text-xs truncate max-w-[120px]">{restaurant.location}</span>
+              <span className="text-xs truncate max-w-[120px]">
+                {restaurant.location}
+              </span>
             </div>
           </div>
         </div>

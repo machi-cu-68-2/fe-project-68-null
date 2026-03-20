@@ -2,9 +2,13 @@ import LogoContainer from "./LogoContainer";
 import LogoText from "./LogoText";
 import NavLink from "./NavLink";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import ProfileWithDropdown from "./ProfileWithDropdown";
+import Users from "@/interface/๊Users";
 
-export default function NavBar() {
-  const session = false; // TODO session signin login
+export default async function NavBar() {
+  const session = await getServerSession(authOptions); // TODO session signin login
   return (
     <div
       className="top-0 z-50 w-full fixed flex justify-center py-4 px-4 text-left text-[1.125rem] 
@@ -31,25 +35,29 @@ export default function NavBar() {
         {/* 3. ฝั่งขวา: sign in sign up */}
         <div className="flex items-center w-1/3 justify-end">
           {/**
-           * // TODO implement real data signin signup
+           * // TODO realdata
            */}
-          <div className="flex gap-[16px] items-center h-[40px]">
-            <Link
-              href="/signIn"
-              className="font-semibold leading-[27px] text-[#724a15] text-[18px] 
+          {session ? (
+            <ProfileWithDropdown user={session.user as Users} />
+          ) : (
+            <div className="flex gap-[16px] items-center h-[40px]">
+              <Link
+                href="/api/auth/signin" /*"/signIn"*/
+                className="font-semibold leading-[27px] text-[#724a15] text-[18px] 
               hover:text-[#e8a118] transition-colors"
-            >
-              Sign in
-            </Link>
-            <Link
-              href="/signUp"
-              className="bg-[#ce7b11] h-[40px] px-6 flex items-center 
+              >
+                Sign in
+              </Link>
+              <Link
+                href="/signUp"
+                className="bg-[#ce7b11] h-[40px] px-6 flex items-center 
               justify-center rounded-full shadow-md font-medium leading-[24px] text-[16px]
                text-white hover:bg-[#e8a118] transition-colors"
-            >
-              Sign up
-            </Link>
-          </div>
+              >
+                Sign up
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

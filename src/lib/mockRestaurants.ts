@@ -1,4 +1,4 @@
-import { TopRestaurants } from "@/interface";
+import { TopRestaurants } from "@/interface/TopRestaurant";
 
 // ============================================================
 // TODO: แทนที่ mock data นี้ด้วยการดึงข้อมูลจริงจาก database
@@ -13,7 +13,11 @@ export const FILTERS = [
   "Seafood",
 ];
 
-export const mockRestaurants: (TopRestaurants & { filter: string; description: string; tags: string[] })[] = [
+export const mockRestaurants: (TopRestaurants & {
+  filter: string;
+  description: string;
+  tags: string[];
+})[] = [
   {
     name: "La Maison Dorée",
     category: "French Contemporary",
@@ -96,7 +100,12 @@ export const mockRestaurants: (TopRestaurants & { filter: string; description: s
     filter: "Contemporary",
     description:
       "Chef Priya Sharma reimagines the flavors of her grandmother's kitchen through a modern fine-dining lens. Expect bold spices, unexpected textures, and a warm hospitality that feels like coming home.",
-    tags: ["Tasting Menu", "Vegetarian Options", "Cocktail Pairing", "Modern Indian"],
+    tags: [
+      "Tasting Menu",
+      "Vegetarian Options",
+      "Cocktail Pairing",
+      "Modern Indian",
+    ],
   },
   {
     name: "Atelier Blanc",

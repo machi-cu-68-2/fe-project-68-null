@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { TopRestaurants } from "@/interface";
+import { TopRestaurants } from "@/interface/TopRestaurant";
 import { isLarge as checkIsLarge } from "../lib/isLarge";
 import ImageWithSkeleton from "./ImageWithSkeleton";
 

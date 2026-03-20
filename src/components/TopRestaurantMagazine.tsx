@@ -1,5 +1,5 @@
 import TopRestaurantCard from "./TopRestaurantCard";
-import { TopRestaurants } from "@/interface";
+import { TopRestaurants } from "@/interface/TopRestaurant";
 
 export const mockTopRestaurantData: TopRestaurants[] = [
   {

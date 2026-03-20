@@ -1,6 +1,5 @@
 import ReservationHeader from "@/components/ReservationHeader";
 import CardReservations from "@/components/CardReservations";
-import NavBar from "@/components/NavBar";
 
 // 1. Array เก็บข้อมูลการจอง (แก้เป็น YYYY-MM-DD แล้ว)
 const reservationData = [
@@ -45,27 +44,19 @@ const reservationData = [
 // 2. ต้องมีคำว่า "export default function" ตรงนี้เสมอครับ!
 export default function MyReservationsPage() {
   return (
-    <div className="w-full min-h-screen bg-[#FEFAEC] flex flex-col items-center">
-      <div className="sticky top-0 w-full z-50">
-        <NavBar />
+    <>
+      <ReservationHeader count={reservationData.length} />
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-12 mt-8 w-full justify-items-center">
+        {reservationData.map((item) => (
+          <CardReservations
+            key={item.id}
+            name={item.name}
+            day={item.day}
+            time={item.time}
+            countpeople={item.countpeople}
+          />
+        ))}
       </div>
-      <div className="w-full max-w-[1440px] flex flex-col px-[6.937rem] pt-[4rem] pb-20 box-border font-playfair-display">
-        {/* ส่งจำนวนข้อมูล (length) เข้าไปที่ ReservationHeader */}
-        <ReservationHeader count={reservationData.length} />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-12 mt-8 w-full justify-items-center">
-          {/* ใช้ .map() วนลูปสร้าง CardReservations ตามจำนวนข้อมูล */}
-          {reservationData.map((item) => (
-            <CardReservations
-              key={item.id}
-              name={item.name}
-              day={item.day}
-              time={item.time}
-              countpeople={item.countpeople}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
+    </>
   );
 }

@@ -29,4 +29,6 @@ body {
   --font-playfair-display: var(--font-playfair-display);
   --color-saddlebrown: #8b4513;
   --color-cornsilk: #fff8dc;
+  --color-goldenrod: rgba(232, 161, 24, 1);
+  --color-palegoldenrod: #eee8aa;
 }
