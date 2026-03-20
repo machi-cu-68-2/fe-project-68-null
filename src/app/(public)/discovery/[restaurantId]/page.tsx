@@ -2,21 +2,14 @@
 
 import { use } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { notFound } from "next/navigation";
+import { useRouter, notFound } from "next/navigation";
 import ImageWithSkeleton from "@/components/ImageWithSkeleton";
 import { mockRestaurants } from "mockdata/restaurant";
 import { useSession } from "@/lib/useSession";
 
-// แปลง slug กลับไปหาร้านใน mockRestaurants
-function findRestaurant(slug: string) {
-  return mockRestaurants.find(
-    (r) =>
-      r.name
-        .toLowerCase()
-        .replace(/\s+/g, "-")
-        .replace(/[^a-z0-9-]/g, "") === slug,
-  );
+// ค้นหาร้านจาก id
+function findRestaurant(id: string) {
+  return mockRestaurants.find((r) => r.id === id);
 }
 
 interface RestaurantPageProps {

@@ -7,13 +7,8 @@ interface RestaurantCardProps {
 }
 
 export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
-  const slug = restaurant.name
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^a-z0-9-]/g, "");
-
   return (
-    <Link href={`/discovery/${slug}`} className="group block h-full">
+    <Link href={`/discovery/${restaurant.id}`} className="group block h-full">
       <div className="bg-white rounded-2xl overflow-hidden border-2 border-[#f8e9a1] shadow-md transition-all duration-200 group-hover:-translate-y-1 group-hover:shadow-xl h-full flex flex-col">
         {/* รูปร้าน */}
         <div className="relative h-44 overflow-hidden shrink-0">
