@@ -9,7 +9,6 @@ export default function Home() {
 
       {/* ส่วนเนื้อหาหลัก*/}
       <main className="flex-1 flex flex-col w-full">
-        {/* TODO: ใส่เนื้อหาเช่น Recommended Restaurants หรือ Categories ตรงนี้ */}
         <TopRestaurantMagazine />
       </main>
 

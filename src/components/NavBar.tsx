@@ -35,14 +35,14 @@ export default function NavBar() {
            */}
           <div className="flex gap-[16px] items-center h-[40px]">
             <Link
-              href="/signin"
+              href="/signIn"
               className="font-semibold leading-[27px] text-[#724a15] text-[18px] 
               hover:text-[#e8a118] transition-colors"
             >
               Sign in
             </Link>
             <Link
-              href="/signup"
+              href="/signUp"
               className="bg-[#ce7b11] h-[40px] px-6 flex items-center 
               justify-center rounded-full shadow-md font-medium leading-[24px] text-[16px]
                text-white hover:bg-[#e8a118] transition-colors"
