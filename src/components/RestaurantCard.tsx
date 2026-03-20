@@ -1,9 +1,9 @@
 import Link from "next/link";
 import ImageWithSkeleton from "@/components/ImageWithSkeleton";
-import { TopRestaurants } from "@/interface/TopRestaurant";
+import { Restaurant } from "@/interface/Restaurant";
 
 interface RestaurantCardProps {
-  restaurant: TopRestaurants;
+  restaurant: Restaurant;
 }
 
 export default function RestaurantCard({ restaurant }: RestaurantCardProps) {

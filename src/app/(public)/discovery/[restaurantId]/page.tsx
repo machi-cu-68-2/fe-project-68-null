@@ -1,10 +1,11 @@
 "use client";
 
+import { use } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { notFound } from "next/navigation";
 import ImageWithSkeleton from "@/components/ImageWithSkeleton";
-import { mockRestaurants } from "@/lib/mockRestaurants";
+import { mockRestaurants } from "mockdata/restaurant";
 import { useSession } from "@/lib/useSession";
 
 // แปลง slug กลับไปหาร้านใน mockRestaurants
@@ -14,18 +15,19 @@ function findRestaurant(slug: string) {
       r.name
         .toLowerCase()
         .replace(/\s+/g, "-")
-        .replace(/[^a-z0-9-]/g, "") === slug
+        .replace(/[^a-z0-9-]/g, "") === slug,
   );
 }
 
 interface RestaurantPageProps {
-  params: { restaurantId: string };
+  params: Promise<{ restaurantId: string }>;
 }
 
 export default function RestaurantPage({ params }: RestaurantPageProps) {
+  const { restaurantId } = use(params);
   const router = useRouter();
   const { isLoggedIn } = useSession();
-  const restaurant = findRestaurant(params.restaurantId);
+  const restaurant = findRestaurant(restaurantId);
 
   if (!restaurant) return notFound();
 
@@ -33,7 +35,7 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
   const handleReserve = () => {
     if (!isLoggedIn) {
       // redirect ไป signin พร้อมส่ง path กลับมาหน้านี้หลัง login
-      router.push(`/signin?redirect=/discovery/${params.restaurantId}`);
+      router.push(`/signin?redirect=/discovery/${restaurantId}`);
     } else {
       // TODO: ทำ reservation จริงเมื่อมี backend
       alert("Reservation confirmed!");
@@ -56,7 +58,14 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
           href="/discovery"
           className="absolute top-6 left-6 flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+          >
             <path d="M19 12H5M12 5l-7 7 7 7" />
           </svg>
           Back to Discovery
@@ -68,19 +77,22 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
             <span className="bg-[#f2d257] text-[#8b4515] font-semibold text-sm px-3 py-1 rounded-full">
               ★ {restaurant.rating}
             </span>
-            <span className="text-white/80 text-sm">({restaurant.reviews} reviews)</span>
+            <span className="text-white/80 text-sm">
+              ({restaurant.reviews} reviews)
+            </span>
           </div>
           <h1 className="font-playfair-display font-bold text-4xl md:text-6xl text-white leading-tight mb-2">
             {restaurant.name}
           </h1>
-          <p className="text-[#f2d257] text-lg md:text-xl font-medium">{restaurant.category}</p>
+          <p className="text-[#f2d257] text-lg md:text-xl font-medium">
+            {restaurant.category}
+          </p>
         </div>
       </div>
 
       {/* Content */}
       <div className="max-w-5xl mx-auto px-6 md:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-
           {/* Left: Details */}
           <div className="lg:col-span-2 flex flex-col gap-8">
             <div>
@@ -97,7 +109,7 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
                 Highlights
               </h2>
               <div className="flex flex-wrap gap-2">
-                {restaurant.tags.map((tag) => (
+                {restaurant.tags.map((tag: string) => (
                   <span
                     key={tag}
                     className="bg-white border-2 border-[#f8e9a1] text-[#8b4515] px-4 py-1.5 rounded-full text-sm font-medium"
@@ -110,20 +122,36 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-white rounded-2xl border-2 border-[#f8e9a1] p-5">
-                <p className="text-[rgba(139,69,21,0.5)] text-xs uppercase tracking-wider mb-1">Cuisine</p>
-                <p className="font-playfair-display font-bold text-[#724a15]">{restaurant.category}</p>
+                <p className="text-[rgba(139,69,21,0.5)] text-xs uppercase tracking-wider mb-1">
+                  Cuisine
+                </p>
+                <p className="font-playfair-display font-bold text-[#724a15]">
+                  {restaurant.category}
+                </p>
               </div>
               <div className="bg-white rounded-2xl border-2 border-[#f8e9a1] p-5">
-                <p className="text-[rgba(139,69,21,0.5)] text-xs uppercase tracking-wider mb-1">Location</p>
-                <p className="font-playfair-display font-bold text-[#724a15]">{restaurant.location}</p>
+                <p className="text-[rgba(139,69,21,0.5)] text-xs uppercase tracking-wider mb-1">
+                  Location
+                </p>
+                <p className="font-playfair-display font-bold text-[#724a15]">
+                  {restaurant.location}
+                </p>
               </div>
               <div className="bg-white rounded-2xl border-2 border-[#f8e9a1] p-5">
-                <p className="text-[rgba(139,69,21,0.5)] text-xs uppercase tracking-wider mb-1">Rating</p>
-                <p className="font-playfair-display font-bold text-[#724a15]">★ {restaurant.rating} / 5.0</p>
+                <p className="text-[rgba(139,69,21,0.5)] text-xs uppercase tracking-wider mb-1">
+                  Rating
+                </p>
+                <p className="font-playfair-display font-bold text-[#724a15]">
+                  ★ {restaurant.rating} / 5.0
+                </p>
               </div>
               <div className="bg-white rounded-2xl border-2 border-[#f8e9a1] p-5">
-                <p className="text-[rgba(139,69,21,0.5)] text-xs uppercase tracking-wider mb-1">Reviews</p>
-                <p className="font-playfair-display font-bold text-[#724a15]">{restaurant.reviews} guests</p>
+                <p className="text-[rgba(139,69,21,0.5)] text-xs uppercase tracking-wider mb-1">
+                  Reviews
+                </p>
+                <p className="font-playfair-display font-bold text-[#724a15]">
+                  {restaurant.reviews} guests
+                </p>
               </div>
             </div>
           </div>
@@ -142,7 +170,9 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
 
               {/* Date */}
               <div className="flex flex-col gap-1.5">
-                <label className="font-playfair-display font-semibold text-[#724a15] text-sm">Date</label>
+                <label className="font-playfair-display font-semibold text-[#724a15] text-sm">
+                  Date
+                </label>
                 <input
                   type="date"
                   className="bg-[#fefaec] border-2 border-[#f8e9a1] rounded-xl px-4 py-2.5 text-[#724a15] text-sm outline-none focus:border-[#ce7b11] transition-colors"
@@ -151,9 +181,19 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
 
               {/* Time */}
               <div className="flex flex-col gap-1.5">
-                <label className="font-playfair-display font-semibold text-[#724a15] text-sm">Time</label>
+                <label className="font-playfair-display font-semibold text-[#724a15] text-sm">
+                  Time
+                </label>
                 <select className="bg-[#fefaec] border-2 border-[#f8e9a1] rounded-xl px-4 py-2.5 text-[#724a15] text-sm outline-none focus:border-[#ce7b11] transition-colors">
-                  {["6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM", "9:00 PM"].map((t) => (
+                  {[
+                    "6:00 PM",
+                    "6:30 PM",
+                    "7:00 PM",
+                    "7:30 PM",
+                    "8:00 PM",
+                    "8:30 PM",
+                    "9:00 PM",
+                  ].map((t) => (
                     <option key={t}>{t}</option>
                   ))}
                 </select>
@@ -161,10 +201,14 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
 
               {/* Guests */}
               <div className="flex flex-col gap-1.5">
-                <label className="font-playfair-display font-semibold text-[#724a15] text-sm">Guests</label>
+                <label className="font-playfair-display font-semibold text-[#724a15] text-sm">
+                  Guests
+                </label>
                 <select className="bg-[#fefaec] border-2 border-[#f8e9a1] rounded-xl px-4 py-2.5 text-[#724a15] text-sm outline-none focus:border-[#ce7b11] transition-colors">
                   {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
-                    <option key={n}>{n} {n === 1 ? "guest" : "guests"}</option>
+                    <option key={n}>
+                      {n} {n === 1 ? "guest" : "guests"}
+                    </option>
                   ))}
                 </select>
               </div>

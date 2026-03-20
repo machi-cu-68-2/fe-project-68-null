@@ -1,6 +1,6 @@
 import NavBar from "@/components/NavBar";
 
-export default function UserLayout({
+export default async function UserLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -10,7 +10,7 @@ export default function UserLayout({
       <div className="sticky top-0 w-full z-50">
         <NavBar />
       </div>
-      <div className="w-full max-w-[1440px] flex flex-col px-[6.937rem] pt-[4rem] pb-20 box-border font-playfair-display">
+      <div className="w-full max-w-[1440px] flex flex-col px-[6.937rem] pt-16 pb-20 box-border font-playfair-display">
         {children}
       </div>
     </div>

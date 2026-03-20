@@ -1,8 +1,5 @@
-import { TopRestaurants } from "@/interface/TopRestaurant";
+import { Restaurant } from "@/interface/Restaurant";
 
-// ============================================================
-// TODO: แทนที่ mock data นี้ด้วยการดึงข้อมูลจริงจาก database
-// ============================================================
 export const FILTERS = [
   "All",
   "French",
@@ -13,7 +10,7 @@ export const FILTERS = [
   "Seafood",
 ];
 
-export const mockRestaurants: (TopRestaurants & {
+export const mockRestaurants: (Restaurant & {
   filter: string;
   description: string;
   tags: string[];

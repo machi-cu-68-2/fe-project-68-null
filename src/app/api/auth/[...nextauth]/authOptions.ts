@@ -1,15 +1,12 @@
 import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import userSignIn from "@/lib/userSignIn";
 
 export const authOptions: AuthOptions = {
+  // 1. กำหนด Providers (ช่องทางการ Login)
   providers: [
     CredentialsProvider({
-      // The name to display on the sign in form (e.g. "Sign in with...")
       name: "Credentials",
-      // `credentials` is used to generate a form on the sign in page.
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
         email: {
           label: "Email",
@@ -18,21 +15,42 @@ export const authOptions: AuthOptions = {
         },
         password: { label: "Password", type: "password" },
       },
+      // ทำงานเมื่อผู้ใช้กดปุ่ม Sign in
       async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
+        if (!credentials) return null;
+
+        // เรียกฟังก์ชันของคุณเพื่อไปเช็คใน Database
+        const user = await userSignIn(credentials.email, credentials.password);
 
         if (user) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user;
+          return user; // ถ้าเจอ user และรหัสถูก ให้ส่ง user กลับไป (จะไปเข้า JWT ต่อ)
         } else {
-          // If you return null then an error will be displayed advising the user to check their details.
-          return null;
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+          return null; // ถ้าไม่เจอ หรือรหัสผิด ส่ง null (จะแสดง Error หน้าเว็บ)
         }
       },
     }),
-  ],
-  session: { strategy: "jwt" },
+  ], // <-- ปิด Array ของ providers ตรงนี้
+
+  // 2. Callbacks (ต้องอยู่ระดับเดียวกับ providers)
+  callbacks: {
+    // ทำงานหลังจาก authorize สำเร็จ เพื่อสร้าง Token
+    async jwt({ token, user }) {
+      // ถ้ามี user ส่งมา (ตอน login ครั้งแรก) ให้เอาข้อมูล user ไปรวมกับ token
+      if (user) {
+        token = { ...token, ...user };
+      }
+      return token;
+    },
+    // ทำงานทุกครั้งที่ฝั่ง Client หรือ Server เรียกใช้ Session
+    async session({ session, token }) {
+      // เอาข้อมูลจาก token มาใส่ใน session.user เพื่อให้ Frontend เอาไปใช้ได้
+      session.user = token as any; // (ใช้ as any ชั่วคราวไปก่อนเพื่อเลี่ยง TS Error)
+      return session;
+    },
+  },
+
+  // 3. กำหนดรูปแบบ Session
+  session: {
+    strategy: "jwt",
+  },
 };

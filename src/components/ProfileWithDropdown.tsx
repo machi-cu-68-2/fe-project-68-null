@@ -12,20 +12,20 @@ export default function ProfileWithDropdown({ user }: { user: Users }) {
     <div className="relative w-max font-playfair-display">
       {/* Profile Trigger */}
       <button
-        className="flex items-center w-44 h-13 px-4 gap-3 bg-transparent rounded-full 
+        className="flex items-center min-w-max h-13 px-4 gap-3 bg-transparent rounded-full 
       cursor-pointer hover:bg-black/5 transition-colors"
         onClick={() => setDropDownClicked(!isDropDownClicked)}
       >
         {/* Avatar */}
         <div className="flex items-center justify-center w-8 h-8 rounded-full bg-goldenrod shrink-0 text-white">
           <b className="leading-none text-sm">
-            {user.name.charAt(0).toUpperCase()}
+            {user?.name?.charAt(0).toUpperCase() || "U"}
           </b>
         </div>
 
         {/* Name */}
-        <span className="flex-1 text-base font-semibold text-saddlebrown text-left">
-          {user.name}
+        <span className="flex-1 text-base font-semibold text-saddlebrown text-left whitespace-nowrap">
+          {user?.name || "User"}
         </span>
 
         {/* Chevron/Icon */}
@@ -68,7 +68,10 @@ export default function ProfileWithDropdown({ user }: { user: Users }) {
             <span className="text-base font-semibold">My Profile</span>
           </Link>
 
-          <button className="flex items-center w-full px-4 py-3 gap-3 hover:bg-gray-50 transition-colors">
+          <Link
+            href={"/my-reservations"}
+            className="flex items-center w-full px-4 py-3 gap-3 hover:bg-gray-50 transition-colors"
+          >
             <Image
               className="w-4 h-4"
               width={18}
@@ -77,7 +80,7 @@ export default function ProfileWithDropdown({ user }: { user: Users }) {
               src="/icons/calendar.svg"
             />
             <span className="text-base font-semibold">My Reservations</span>
-          </button>
+          </Link>
 
           <button className="flex items-center w-full px-4 py-3 gap-3 hover:bg-gray-50 transition-colors">
             <Image

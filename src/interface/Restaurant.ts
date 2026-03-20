@@ -1,4 +1,4 @@
-interface TopRestaurants {
+export interface Restaurant {
   name: string;
   category: string;
   location: string;
@@ -7,4 +7,4 @@ interface TopRestaurants {
   imageSrc: string;
 }
 
-export default TopRestaurants;
+

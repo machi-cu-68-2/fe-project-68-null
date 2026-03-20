@@ -1,24 +1,11 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import Image from "next/image";
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
-
-  if (!session || !session.user) {
-    return (
-      <div className="flex flex-col items-center justify-center py-20">
-        <h1 className="text-3xl font-bold text-saddlebrown">
-          Not Authenticated
-        </h1>
-        <p className="mt-4 text-lg text-gray-600">
-          Please sign in to view your profile.
-        </p>
-      </div>
-    );
-  }
-
-  const { name, email } = session.user;
+  if (!session?.user) return null;
+  const name = session.user.name ?? "User";
+  const email = session.user.email ?? "";
 
   return (
     <div className="flex flex-col items-start w-full gap-8 mt-12">

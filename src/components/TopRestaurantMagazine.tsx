@@ -1,7 +1,7 @@
 import TopRestaurantCard from "./TopRestaurantCard";
-import { TopRestaurants } from "@/interface/TopRestaurant";
+import { Restaurant } from "@/interface/Restaurant";
 
-export const mockTopRestaurantData: TopRestaurants[] = [
+export const mockTopRestaurantData: Restaurant[] = [
   {
     name: "La Maison Dorée",
     category: "French Contemporary",

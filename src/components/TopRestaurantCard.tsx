@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { TopRestaurants } from "@/interface/TopRestaurant";
+import { Restaurant } from "@/interface/Restaurant";
 import { isLarge as checkIsLarge } from "../lib/isLarge";
 import ImageWithSkeleton from "./ImageWithSkeleton";
 
-export default function TopRestaurantCard(props: TopRestaurants) {
+export default function TopRestaurantCard(props: Restaurant) {
   const { name, category, location, rating, reviews, imageSrc } = props;
   const isLarge = checkIsLarge(props);
   return (

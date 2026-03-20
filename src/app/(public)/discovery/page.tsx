@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import DiscoveryHero from "@/components/DiscoveryHero";
 import FilterChips from "@/components/FilterChips";
 import RestaurantCard from "@/components/RestaurantCard";
-import { mockRestaurants, FILTERS } from "@/lib/mockRestaurants";
+import { mockRestaurants, FILTERS } from "mockdata/restaurant";
 
 export default function DiscoveryPage() {
   const [searchQuery, setSearchQuery] = useState("");

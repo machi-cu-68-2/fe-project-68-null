@@ -1,10 +1,11 @@
 "use client";
 
+import { use } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { notFound } from "next/navigation";
 import ImageWithSkeleton from "@/components/ImageWithSkeleton";
-import { mockRestaurants } from "@/lib/mockRestaurants";
+import { mockRestaurants } from "mockdata/restaurant";
 import { useSession } from "@/lib/useSession";
 
 // แปลง slug กลับไปหาร้านใน mockRestaurants
@@ -19,13 +20,14 @@ function findRestaurant(slug: string) {
 }
 
 interface RestaurantPageProps {
-  params: { restaurantId: string };
+  params: Promise<{ restaurantId: string }>;
 }
 
 export default function RestaurantPage({ params }: RestaurantPageProps) {
+  const { restaurantId } = use(params);
   const router = useRouter();
   const { isLoggedIn } = useSession();
-  const restaurant = findRestaurant(params.restaurantId);
+  const restaurant = findRestaurant(restaurantId);
 
   if (!restaurant) return notFound();
 
@@ -33,7 +35,7 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
   const handleReserve = () => {
     if (!isLoggedIn) {
       // redirect ไป signin พร้อมส่ง path กลับมาหน้านี้หลัง login
-      router.push(`/signin?redirect=/discovery/${params.restaurantId}`);
+      router.push(`/signin?redirect=/discovery/${restaurantId}`);
     } else {
       // TODO: ทำ reservation จริงเมื่อมี backend
       alert("Reservation confirmed!");
@@ -97,7 +99,7 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
                 Highlights
               </h2>
               <div className="flex flex-wrap gap-2">
-                {restaurant.tags.map((tag) => (
+                {restaurant.tags.map((tag: string) => (
                   <span
                     key={tag}
                     className="bg-white border-2 border-[#f8e9a1] text-[#8b4515] px-4 py-1.5 rounded-full text-sm font-medium"
