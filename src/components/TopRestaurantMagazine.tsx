@@ -1,10 +1,14 @@
 import TopRestaurantCard from "./TopRestaurantCard";
-import { mockRestaurants } from "mockdata/restaurant";
+import getRestaurants from "@/lib/getRestaurant";
 
-export default function TopRestaurantMagazine() {
+export default async function TopRestaurantMagazine() {
+  // ดึงข้อมูลจริงจาก API
+  const response = await getRestaurants();
+  const restaurants = response.data || [];
+
   // สร้างสำเนาของอาเรย์และเรียงลำดับตามเรตติ้ง (มากไปน้อย)
-  const sortedRestaurants = [...mockRestaurants].sort(
-    (a, b) => Number.parseFloat(b.rating) - Number.parseFloat(a.rating),
+  const sortedRestaurants = [...restaurants].sort(
+    (a, b) => b.rating - a.rating,
   );
 
   // ดึง 6 ร้านแรกมาแสดงใน Grid พิเศษ
