@@ -44,7 +44,7 @@ export const authOptions: AuthOptions = {
     // ทำงานทุกครั้งที่ฝั่ง Client หรือ Server เรียกใช้ Session
     async session({ session, token }) {
       // เอาข้อมูลจาก token มาใส่ใน session.user เพื่อให้ Frontend เอาไปใช้ได้
-      session.user = token as any; // (ใช้ as any ชั่วคราวไปก่อนเพื่อเลี่ยง TS Error)
+      session.user = token as any;
       return session;
     },
   },

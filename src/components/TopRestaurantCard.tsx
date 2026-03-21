@@ -1,16 +1,23 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Restaurant } from "@/interface/Restaurant";
 import { isLarge as checkIsLarge } from "../lib/isLarge";
 import ImageWithSkeleton from "./ImageWithSkeleton";
 
-export default function TopRestaurantCard(props: Restaurant) {
-  const { name, category, location, rating, reviews, imageSrc } = props;
-  const isLarge = checkIsLarge(props);
+interface TopRestaurantCardProps extends Restaurant {
+  isLarge?: boolean;
+}
+
+export default function TopRestaurantCard(props: TopRestaurantCardProps) {
+  const { id, name, category, location, rating, reviews, imageSrc, isLarge: isLargeProp } = props;
+  const isLarge = isLargeProp ?? checkIsLarge(props);
   return (
-    <div
-      className={`relative w-full shadow-lg rounded-2xl overflow-hidden group 
-        ${isLarge ? "h-[43.75rem]" : "h-[31.25rem] sm:h-[21rem] md:h-[21rem] lg:h-[21rem] xl:h-[21.375rem]"}`}
-    >
+    <Link href={`/discovery/${id}`} className="w-full block">
+      <div
+        className={`relative w-full shadow-lg rounded-2xl overflow-hidden group 
+          ${isLarge ? "h-[43.75rem]" : "h-[31.25rem] sm:h-[21rem] md:h-[21rem] lg:h-[21rem] xl:h-[21.375rem]"}
+          cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-1`}
+      >
       {/* พื้นหลัง: รูปภาพและ Gradient */}
       <ImageWithSkeleton
         src={imageSrc}
@@ -63,7 +70,8 @@ export default function TopRestaurantCard(props: Restaurant) {
           />{" "}
           {location}
         </div>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }

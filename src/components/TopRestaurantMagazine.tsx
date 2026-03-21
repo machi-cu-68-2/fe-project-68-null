@@ -1,106 +1,54 @@
 import TopRestaurantCard from "./TopRestaurantCard";
-import { Restaurant } from "@/interface/Restaurant";
+import getRestaurants from "@/lib/getRestaurant";
 
-export const mockTopRestaurantData: Restaurant[] = [
-  {
-    name: "La Maison Dorée",
-    category: "French Contemporary",
-    location: "Downtown, Manhattan",
-    rating: "4.9",
-    reviews: "324",
-    imageSrc: "/images/la-maison-doree.jpg",
-  },
-  {
-    name: "Sakura Garden",
-    category: "Japanese Fusion",
-    location: "Midtown East",
-    rating: "4.8",
-    reviews: "256",
-    imageSrc: "/images/sakura-garden.jpg",
-  },
-  {
-    name: "Oceano Blu",
-    category: "Mediterranean Seafood",
-    location: "Chelsea, West Side",
-    rating: "4.7",
-    reviews: "198",
-    imageSrc: "/images/oceano-blu.jpg",
-  },
-  {
-    name: "The Golden Calf",
-    category: "American Steakhouse",
-    location: "Financial District",
-    rating: "4.8",
-    reviews: "412",
-    imageSrc: "/images/the-golden-calf.jpg",
-  },
-  {
-    name: "Bella Trattoria",
-    category: "Classic Italian",
-    location: "Little Italy",
-    rating: "4.6",
-    reviews: "150",
-    imageSrc: "/images/bella-trattoria.jpg",
-  },
-  {
-    name: "Dragon Palace",
-    category: "Authentic Chinese",
-    location: "Chinatown",
-    rating: "4.5",
-    reviews: "320",
-    imageSrc: "/images/dragon-palace.jpg",
-  },
-  {
-    name: "El Matador",
-    category: "Spanish Tapas",
-    location: "Greenwich Village",
-    rating: "4.7",
-    reviews: "210",
-    imageSrc: "/images/el-matador.jpg",
-  },
-];
+export default async function TopRestaurantMagazine() {
+  // ดึงข้อมูลจริงจาก API
+  const response = await getRestaurants();
+  const restaurants = response.data || [];
 
-export default function TopRestaurantMagazine() {
   // สร้างสำเนาของอาเรย์และเรียงลำดับตามเรตติ้ง (มากไปน้อย)
-  const sortedRestaurants = [...mockTopRestaurantData].sort(
-    (a, b) => parseFloat(b.rating) - parseFloat(a.rating),
+  const sortedRestaurants = [...restaurants].sort(
+    (a, b) => b.rating - a.rating,
   );
 
-  // ดึงร้านที่มีเรตติ้งสูงสุด 1 ร้านแรก (ทำเป็นการ์ดใหญ่)
-  const largeRestaurant = sortedRestaurants[0];
-  // ดึงร้านที่มีเรตติ้งรองลงมาอีก 2 ร้าน (ตำแหน่งขวาบน)
-  const rightRestaurants = sortedRestaurants.slice(1, 3);
-  // ดึงร้านอีก 3 ร้าน สำหรับแสดงด้านล่าง แนวนอน
-  const bottomRestaurants = sortedRestaurants.slice(3, 6);
+  // ดึง 6 ร้านแรกมาแสดงใน Grid พิเศษ
+  const displayRestaurants = sortedRestaurants.slice(0, 6);
+
+  if (displayRestaurants.length < 6) return null;
 
   return (
     <section
       className="w-full bg-[#FFFAF0] py-20 px-6 md:px-12 lg:px-[6.5rem] 
     flex flex-col items-center box-border gap-12 font-sans"
     >
-      <div className="w-full max-w-7xl mx-auto p-4 flex flex-col gap-6">
-        {/* ส่วนบน: ซ้าย 1 ใหญ่, ขวา 2 เล็ก */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* ฝั่งซ้าย: การ์ดใบใหญ่ (กินพื้นที่ 2 คอลัมน์บนจอใหญ่) */}
-          {largeRestaurant && (
-            <div className="lg:col-span-2">
-              <TopRestaurantCard {...largeRestaurant} />
-            </div>
-          )}
-
-          {/* ฝั่งขวา: การ์ดใบเล็ก 2 ใบ ซ้อนกันแนวตั้ง */}
-          <div className="flex flex-col gap-6">
-            {rightRestaurants.map((restaurant) => (
-              <TopRestaurantCard key={restaurant.name} {...restaurant} />
-            ))}
+      <div className="w-full max-w-7xl mx-auto p-4">
+        {/* Unified Grid Layout for 1 1 2 / 1 1 3 / 4 5 6 pattern */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Restaurant 1: 2x2 block (top left) on lg screens. On md, we'll let it take the full width for impact. */}
+          <div className="md:col-span-2 lg:col-span-2 lg:row-span-2">
+            <TopRestaurantCard {...displayRestaurants[0]} isLarge={true} />
           </div>
-        </div>
 
-        {/* ส่วนล่าง: การ์ด 3 ใบเรียงแนวนอน */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {bottomRestaurants.map((restaurant) => (
-            <TopRestaurantCard key={restaurant.name} {...restaurant} />
-          ))}
+          {/* Restaurant 2: 1x1 block (top right) */}
+          <div className="col-span-1">
+            <TopRestaurantCard {...displayRestaurants[1]} isLarge={false} />
+          </div>
+
+          {/* Restaurant 3: 1x1 block (middle right) */}
+          <div className="col-span-1">
+            <TopRestaurantCard {...displayRestaurants[2]} isLarge={false} />
+          </div>
+
+          {/* Restaurant 4, 5, 6: 1x1 blocks in a row below (takes remaining md slots) */}
+          <div className="col-span-1">
+            <TopRestaurantCard {...displayRestaurants[3]} isLarge={false} />
+          </div>
+          <div className="col-span-1">
+            <TopRestaurantCard {...displayRestaurants[4]} isLarge={false} />
+          </div>
+          <div className="col-span-1">
+            <TopRestaurantCard {...displayRestaurants[5]} isLarge={false} />
+          </div>
         </div>
       </div>
     </section>

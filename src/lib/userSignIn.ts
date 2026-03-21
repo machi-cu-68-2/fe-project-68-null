@@ -11,7 +11,8 @@ export default async function userSignIn(
   });
 
   if (!response.ok) {
-    throw new Error("Failed to fetch user data");
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Failed to sign in");
   }
 
   return response.json();
