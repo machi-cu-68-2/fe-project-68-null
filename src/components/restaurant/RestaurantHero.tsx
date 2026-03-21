@@ -19,7 +19,7 @@ export default function RestaurantHero({
       {/* Back button */}
       <Link
         href="/discovery"
-        className="absolute top-6 left-6 flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors"
+        className="absolute bottom-6 right-6 z-10 flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors"
       >
         <svg
           width="16"
