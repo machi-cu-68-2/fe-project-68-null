@@ -1,7 +1,6 @@
-// TODO: แทนที่ด้วย session จริงเมื่อทำระบบ Auth (NextAuth / Supabase / Clerk)
-// เปลี่ยน false → true เพื่อจำลองว่า login แล้ว
+import { useSession as useNextAuthSession } from "next-auth/react";
 
 export function useSession() {
-  const session = false;
+  const { data: session } = useNextAuthSession();
   return { session, isLoggedIn: !!session };
 }

@@ -22,6 +22,8 @@ export const metadata: Metadata = {
   description: "Build By Null's Team",
 };
 
+import NextAuthProviders from "../providers/NextAuthProviders";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,7 +35,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} 
         antialiased bg-background text-foreground font-sans`}
       >
-        {children}
+        <NextAuthProviders>{children}</NextAuthProviders>
       </body>
     </html>
   );

@@ -42,7 +42,7 @@ export default async function NavBar() {
           ) : (
             <div className="flex gap-[16px] items-center h-[40px]">
               <Link
-                href="/api/auth/signin" /*"/signIn"*/
+                href="/signIn"
                 className="font-semibold leading-[27px] text-[#724a15] text-[18px] 
               hover:text-[#e8a118] transition-colors whitespace-nowrap"
               >
