@@ -1,19 +1,21 @@
-import Image from "next/image";
-import HeadCard from "@/components/HeadCard";
-import CardTime from "@/components/CardTime";
-import CardDay from "@/components/CardDay";
-import CardCountPeople from "./CardPeople";
-import CardButton from "@/components/CardButton";
-export default function CardRerservations({
+import HeadCard from "@/components/my-reservations/HeadCard";
+import CardTime from "@/components/my-reservations/CardTime";
+import CardDay from "@/components/my-reservations/CardDay";
+import CardCountPeople from "@/components/my-reservations/CardPeople";
+import CardButton from "@/components/my-reservations/CardButton";
+
+export default function CardReservations({
+  id,
   name,
   day,
   time,
-  countpeople,
+  tableCount,
 }: {
+  id: string;
   name: string;
   day: string;
   time: string;
-  countpeople: string;
+  tableCount: number;
 }) {
   return (
     <div className="mt-[1] w-[22.5rem] h-[20rem] relative flex flex-col items-start gap-[1.5rem] text-left text-[2rem] text-[#724a15] font-playfair-display">
@@ -23,9 +25,9 @@ export default function CardRerservations({
           <div className="absolute top-[7.063rem] left-[2.125rem] w-full h-[6rem] flex flex-col items-start gap-[0.75rem] text-[#724a15] font-inter">
             <CardTime time={time} />
             <CardDay day={day} />
-            <CardCountPeople countpeople={countpeople} />
+            <CardCountPeople countpeople={tableCount.toString()} />
           </div>
-          <CardButton />
+          <CardButton reservationId={id} />
         </div>
       </div>
     </div>

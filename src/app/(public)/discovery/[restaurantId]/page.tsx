@@ -2,9 +2,10 @@
 
 import { use, useState, useEffect } from "react";
 import { useRouter, notFound } from "next/navigation";
-import { useSession } from "@/lib/useSession";
-import { getRestaurant } from "@/lib/getRestaurant";
+import { useSession } from "next-auth/react";
+import getRestaurant from "@/lib/getRestaurant";
 import { Restaurant } from "@/interface/Restaurant";
+import createReservation from "@/lib/createReservation";
 
 // Modular Components
 import RestaurantHero from "@/components/restaurant/RestaurantHero";
@@ -19,11 +20,14 @@ interface RestaurantPageProps {
 export default function RestaurantPage({ params }: RestaurantPageProps) {
   const { restaurantId } = use(params);
   const router = useRouter();
-  const { isLoggedIn } = useSession();
+  const { data: session, status } = useSession();
+  const isLoggedIn = status === "authenticated";
 
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [reserveLoading, setReserveLoading] = useState(false);
+  const [reserveError, setReserveError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +44,7 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
           location: typeof data.location === 'string' 
             ? data.location 
             : (data.province || data.district || "Bangkok"),
-          rating: data.rating || 5.0,
+          rating: data.rating || 5,
           reviews: data.reviews || 0,
           imageSrc: data.imageSrc || data.image || "/images/hero-1.jpg",
           description: data.description || "Experience fine dining at its best.",
@@ -75,12 +79,45 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
 
   if (error || !restaurant) return notFound();
 
-  const handleReserve = () => {
+  const handleReserve = async (date: string, time: string, tableCount: number) => {
+    setReserveError(null);
     if (!isLoggedIn) {
-      router.push(`/signIn?redirect=/discovery/${restaurantId}`);
-    } else {
-      // TODO: Implement actual reservation logic
-      alert("Reservation confirmed!");
+      router.push(`/signIn?callbackUrl=/discovery/${restaurantId}`);
+      return;
+    }
+
+    try {
+      setReserveLoading(true);
+      
+      // Parse time (e.g., "12:00 PM") to 24h format for ISO string
+      const [timeStr, period] = time.split(" ");
+      let [hours, minutes] = timeStr.split(":").map(Number);
+      if (period === "PM" && hours < 12) hours += 12;
+      if (period === "AM" && hours === 12) hours = 0;
+
+      const reservationDate = new Date(date);
+      reservationDate.setHours(hours, minutes, 0, 0);
+
+      const token = (session?.user as any)?.token;
+      if (!token) {
+        setReserveError("You must be logged in to reserve.");
+        return;
+      }
+
+      await createReservation(
+        restaurantId,
+        reservationDate.toISOString(),
+        tableCount,
+        token
+      );
+
+      router.push("/my-reservations");
+      router.refresh();
+    } catch (err: any) {
+      console.error("Reservation Error:", err);
+      setReserveError(err.message || "Failed to create reservation. Please try again.");
+    } finally {
+      setReserveLoading(false);
     }
   };
 
@@ -102,6 +139,8 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
               restaurant={restaurant} 
               isLoggedIn={isLoggedIn} 
               onReserve={handleReserve}
+              loading={reserveLoading}
+              errorMessage={reserveError}
             />
           </div>
         </div>

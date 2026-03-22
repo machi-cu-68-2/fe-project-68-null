@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Restaurant } from "@/interface/Restaurant";
-import { isLarge as checkIsLarge } from "../lib/isLarge";
-import ImageWithSkeleton from "./ImageWithSkeleton";
+import { isLarge as checkIsLarge } from "@/lib/isLarge";
+import ImageWithSkeleton from "@/components/ImageWithSkeleton";
 
 interface TopRestaurantCardProps extends Restaurant {
   isLarge?: boolean;

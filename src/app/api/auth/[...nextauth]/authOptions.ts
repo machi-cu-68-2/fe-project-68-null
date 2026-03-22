@@ -20,12 +20,17 @@ export const authOptions: AuthOptions = {
         if (!credentials) return null;
 
         // เรียกฟังก์ชันของคุณเพื่อไปเช็คใน Database
-        const user = await userSignIn(credentials.email, credentials.password);
-
-        if (user) {
-          return user; // ถ้าเจอ user และรหัสถูก ให้ส่ง user กลับไป (จะไปเข้า JWT ต่อ)
-        } else {
-          return null; // ถ้าไม่เจอ หรือรหัสผิด ส่ง null (จะแสดง Error หน้าเว็บ)
+        try {
+          const res = await userSignIn(credentials.email, credentials.password);
+          if (res && res.success) {
+            // Return the user object (res) which contains _id, name, email, token, etc.
+            return res; 
+          } else {
+            return null; // ถ้าไม่เจอ หรือรหัสผิด ส่ง null (จะแสดง Error หน้าเว็บ)
+          }
+        } catch (err) {
+          console.error("userSignIn exception:", err);
+          return null;
         }
       },
     }),

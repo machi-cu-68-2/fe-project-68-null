@@ -1,5 +1,5 @@
-import TopRestaurantCard from "./TopRestaurantCard";
-import getRestaurants from "@/lib/getRestaurant";
+import TopRestaurantCard from "@/components/home/TopRestaurantCard";
+import getRestaurants from "@/lib/getRestaurants";
 
 export default async function TopRestaurantMagazine() {
   // ดึงข้อมูลจริงจาก API

@@ -1,5 +1,5 @@
-import Banner from "@/components/Banner";
-import TopRestaurantMagazine from "@/components/TopRestaurantMagazine";
+import Banner from "@/components/home/Banner";
+import TopRestaurantMagazine from "@/components/home/TopRestaurantMagazine";
 
 export default function Home() {
   return (

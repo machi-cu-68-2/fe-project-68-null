@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import DiscoveryHero from "@/components/DiscoveryHero";
-import RestaurantCard from "@/components/RestaurantCard";
-import AdvancedFilters from "@component/AdvancedFilters";
-import DiscoveryStatus from "@component/DiscoveryStatus";
+import DiscoveryHero from "@/components/discovery/DiscoveryHero";
+import RestaurantCard from "@/components/discovery/RestaurantCard";
+import AdvancedFilters from "@/components/discovery/AdvancedFilters";
+import DiscoveryStatus from "@/components/discovery/DiscoveryStatus";
 import { Restaurant } from "@/interface/Restaurant";
-import getRestaurants from "@/lib/getRestaurant";
+import getRestaurants from "@/lib/getRestaurants";
 import getFilters from "@/lib/getFilters";
 import filterRestaurants from "@/lib/filterRestaurants";
 
